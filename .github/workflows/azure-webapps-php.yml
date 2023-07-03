@@ -37,6 +37,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      
       - uses: actions/checkout@v3
 
       - name: Setup PHP
@@ -89,6 +90,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: php-app
+  
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
