@@ -25,7 +25,7 @@ mysqli_query($link, $sql);
 
 if(move_uploaded_file($tempname, $folder)){
     echo "Records added successfully.";
-    header("location: login.php");
+    header("location: ../homepage.php");
 } else{
     echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
     //header("location: reset_pass.html");

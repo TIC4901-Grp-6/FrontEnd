@@ -89,7 +89,7 @@
         </div>
         <nav class="headerbar">
           <a href="homepage.php">Home</a>
-          <a href="">About</a>
+          <!-- <a href="">About</a> -->
           <div class="dropdown">
             <?php 
               if (session_status() == PHP_SESSION_ACTIVE && isset($_SESSION['login_email'])){

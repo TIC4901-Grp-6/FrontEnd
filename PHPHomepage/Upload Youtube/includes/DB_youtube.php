@@ -1,5 +1,7 @@
 <?php
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
 class DB {
+	
 	
 	public $tableName = 'videos';
 	
@@ -30,9 +32,9 @@ class DB {
 		}
 	}
 	
-	function insert($videoTitle, $videoDesc, $videoTags, $videoFilePath){
-		$sql = "INSERT INTO $this->tableName (video_title, video_description, video_tags, video_path) 
-				VALUES('".$videoTitle."','".$videoDesc."','".$videoTags."','".$videoFilePath."')";
+	function insert($AgentRegistrationNo, $videoTitle, $videoDesc, $videoTags, $videoFilePath){
+		$sql = "INSERT INTO $this->tableName (AgentRegistrationNo, video_title, video_description, video_tags, video_path) 
+				VALUES('".$AgentRegistrationNo."','".$videoTitle."','".$videoDesc."','".$videoTags."','".$videoFilePath."')";
 		if($this->db->query($sql)){
 			return $this->db->insert_id;
 		}else{

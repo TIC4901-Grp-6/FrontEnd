@@ -1,29 +1,22 @@
 <?php
    include("config.php");
+   // require "./PHPHomepage/allFunctions/globalfunctions.php";
+   require "../PHPHomepage/allFunctions/globalfunctions.php";
    session_start();
+   $propdetails = new propertySQLresults();
+   $propdetails->setagentno($_SESSION['login_user']);
 
 // to delete pictures
 	
 if(isset($_GET['deleteid']))
 {
-	$querySelect = "select * from properties where propertyid = ".$_GET['deleteid']. " and AgentRegistrationNo= '". $_SESSION['login_user']."';";
-	$ResultSelectStmt = mysqli_query($link,$querySelect);
-
-	if (!$ResultSelectStmt) {
-		echo "Query execution failed: " . mysqli_error($db);
-	}  else {
-
-      $fetchRecords = mysqli_fetch_array($ResultSelectStmt,MYSQLI_BOTH);
-	
-      $querySelect = "delete from properties where propertyid = ".$_GET['deleteid']. " and AgentRegistrationNo= '". $_SESSION['login_user']."';";
-      $delete = mysqli_query($link,$querySelect);
-   }
-
+   $propdetails->deleteprop($_GET['deleteid']);
 	
 } elseif (isset($_GET['viewid'])) {
    $_SESSION['propertyid'] = $_GET['viewid'];
    header("location: ../PHPHomepage/maindraft%20v3.0.php");
 }
+
 ?>
 <html>
    <head>
@@ -82,7 +75,7 @@ if(isset($_GET['deleteid']))
          </div>
          <nav class="headerbar">
             <a href="../homepage.php">Home</a>
-            <a href="">About</a>
+            <!-- <a href="">About</a> -->
             <div class="dropdown">
                <?php 
                if (session_status() == PHP_SESSION_ACTIVE && isset($_SESSION['login_email'])){
@@ -103,8 +96,7 @@ if(isset($_GET['deleteid']))
 
    <?php
       if (session_status() == PHP_SESSION_ACTIVE && isset($_SESSION['login_user'])){
-         $sql = "SELECT * FROM agent WHERE RegistrationNo = '". $_SESSION['login_user']. "';";
-      $result = mysqli_query($link,$sql);
+      $result = $propdetails->getagentdata();
       if ($result){ $row = mysqli_fetch_array($result,MYSQLI_BOTH);}}
    ?>
 
@@ -229,21 +221,21 @@ if(isset($_GET['deleteid']))
                </tr>
 
                <?php
+                  
                   if (session_status() == PHP_SESSION_ACTIVE && isset($_SESSION['login_user'])){
-                     $sql = "SELECT propertyid, PostalDistrict, StreetName, UnitPrice FROM properties WHERE AgentRegistrationNo= '". $_SESSION['login_user']."';";
-                     $result = mysqli_query($link,$sql);
+                     $result = $propdetails->getpropdatabyagent();
                      if ($result){
                         while ($row = mysqli_fetch_array($result,MYSQLI_BOTH)){
                            ?>
 
                            <tr class="listbox2">
-                              <td><?php echo $row[0]; ?></td>
-                              <td><?php echo $row[1]; ?></td>
-                              <td><?php echo $row[2]; ?></td>
-                              <td><?php echo $row[3]; ?></td>
+                              <td><?php echo $row['PropertyID']; ?></td>
+                              <td><?php echo $row['PostalDistrict']; ?></td>
+                              <td><?php echo $row['StreetName']; ?></td>
+                              <td><?php echo $row['UnitPrice']; ?></td>
                               <td>
-                                 <a href="?viewid=<?php echo $row['propertyid']?>" class="viewbtn">View</a>
-                                 <a href="?deleteid=<?php echo $row['propertyid']?>" class="deletebtn">Delete</a>
+                                 <a href="?viewid=<?php echo $row['PropertyID']?>" class="viewbtn">View</a>
+                                 <a href="?deleteid=<?php echo $row['PropertyID']?>" class="deletebtn">Delete</a>
                               </td>
                            </tr>
 

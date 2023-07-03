@@ -1,0 +1,11 @@
+{
+    "name": "tic4902/testproject",
+    "require-dev": {
+        "phpunit/phpunit": "^10.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Tic4902\\TestProject\\": "src/"
+        }
+    }
+}

@@ -23,15 +23,15 @@
         </div>
         <nav class="headerbar">
           <a href="../../homepage.php">Home</a>
-          <a href="">About</a>
+          <!-- <a href="">About</a> -->
           <div class="dropdown">
             <?php 
               if (session_status() == PHP_SESSION_ACTIVE && isset($_SESSION['login_email'])){
                 echo "
                 <button class='dropbtn'>".$_SESSION['login_name']."</button>
                 <div class='dropdown-content'>
-                  <a href='./login/welcome_profile_".$_SESSION['login_usertype'].".php'>My Profile</a>
-                  <a href='./login/logout.php'>Logout</a>
+                  <a href='../../login/welcome_profile_".$_SESSION['login_usertype'].".php'>My Profile</a>
+                  <a href='../../login/logout.php'>Logout</a>
                   </div>
                 ";
               } else {

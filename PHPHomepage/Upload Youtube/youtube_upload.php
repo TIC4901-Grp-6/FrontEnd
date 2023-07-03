@@ -1,6 +1,8 @@
 <?php
 require_once 'config_youtube.php';
 require_once 'includes/DB_youtube.php';
+session_start();
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
 // create an object of class DB.
 $db = new DB;
 
@@ -29,7 +31,7 @@ if(isset($_REQUEST['videoSubmit'])){
 		}
 	
 		// insert video data
-		$db->insert($videoTitle, $videoDesc, $videoTags, $videoFilePath);
+		$db->insert($AgentRegistrationNo, $videoTitle, $videoDesc, $videoTags, $videoFilePath);
 		
 	}else{
 		header('Location:'.BASE_URI.'index.php?err=bf');

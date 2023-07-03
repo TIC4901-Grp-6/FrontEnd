@@ -38,11 +38,11 @@
          
          // If result matched $myusername and $mypassword, table row must be 1 row	
          if($result) {
-            header("location: ../PHPHomepage/maindraft%20v3.0.php");
+            header("location: display_property_form.php");
          }else {
             $error = "Fail to Update";
             echo $error;
-            header("location: ../PHPHomepage/maindraft%20v3.0.php");
+            header("location: display_property_form.php");
          }
       } else {
          $error = "Your information is invalid";
